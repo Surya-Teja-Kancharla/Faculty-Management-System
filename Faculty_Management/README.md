@@ -1,1 +1,0 @@
-# Faculty_Management_System
