@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Timetable</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .timetable-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+        }
+
+        .timetable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .semester-select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            min-width: 900px;
+        }
+
+        .timetable th, .timetable td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .timetable th {
+            background: #f8f9fa;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .timetable td {
+            vertical-align: top;
+        }
+
+        .day-column {
+            background: #f8f9fa;
+            font-weight: 500;
+            width: 100px;
+        }
+
+        .class-slot {
+            background: #e3f2fd;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .lab-slot {
+            background: #fff3e0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .free-slot {
+            background: #f5f5f5;
+            padding: 0.5rem;
+            border-radius: 4px;
+            color: #666;
+        }
+
+        .legend {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .legend-class { background: #e3f2fd; }
+        .legend-lab { background: #fff3e0; }
+        .legend-free { background: #f5f5f5; }
+    </style>
+</head>
+<body>
+    <!-- Include Navbar -->
+    <div id="navbar-container"></div>
+
+    <div class="container">
+        <div class="timetable-card">
+            <div class="timetable-header">
+                <h1>Faculty Timetable</h1>
+                <select id="semesterSelect" class="semester-select">
+                    <option value="2024-25-sem1">2024-25 Sem 1</option>
+                    <option value="2024-25-sem2">2024-25 Sem 2</option>
+                </select>
+            </div>
+
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>8:45-9:45</th>
+                        <th>9:45-10:35</th>
+                        <th>10:35-11:25</th>
+                        <th>11:25-12:15</th>
+                        <th>12:15-1:05</th>
+                        <th>1:55-2:45</th>
+                        <th>2:45-3:35</th>
+                    </tr>
+                </thead>
+                <tbody id="timetableBody">
+                    <!-- Timetable content will be populated by JavaScript -->
+                </tbody>
+            </table>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color legend-class"></div>
+                    <span>Theory Class</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-lab"></div>
+                    <span>Lab Session</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-free"></div>
+                    <span>Free Period</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load navbar
+        fetch('/navbar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navbar-container').innerHTML = html;
+            });
+    </script>
+    <script src="/action/index4.js"></script>
+</body>
+</html>

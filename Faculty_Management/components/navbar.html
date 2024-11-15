@@ -1,0 +1,66 @@
+<!-- Navbar Template -->
+<style>
+    .navbar {
+        background: #1e4d92;
+        padding: 1rem 2rem;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+        background: rgba(255, 255, 255, 0.1);
+    }
+</style>
+
+<nav class="navbar">
+    <div class="logo">Faculty Portal</div>
+    <div class="nav-links">
+        <a href="/Profile.html" id="profileLink">Profile</a>
+        <a href="/Achievements.html" id="achievementsLink">Achievements</a>
+        <a href="/TimeTable.html" id="timetableLink">Time Table</a>
+        <a href="/Notifications.html" id="notificationsLink">Notifications</a>
+        <a href="/Performance.html" id="performanceLink">Performance</a>
+        <a href="/Login.html" id="logoutBtn">Logout</a>
+    </div>
+</nav>
+
+<script>
+    // Set active link based on current page
+    const currentPage = window.location.pathname.split('/').pop().split('.')[0].toLowerCase();
+    const links = {
+        'profile': document.getElementById('profileLink'),
+        'achievements': document.getElementById('achievementsLink'),
+        'timetable': document.getElementById('timetableLink'),
+        'notifications': document.getElementById('notificationsLink'),
+        'performance': document.getElementById('performanceLink')
+    };
+    
+    if (links[currentPage]) {
+        links[currentPage].classList.add('active');
+    }
+
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        // Clear any stored session data
+        localStorage.clear();
+        sessionStorage.clear();
+        // Redirect to login page
+        window.location.href = '/Login.html';
+    });
+</script>
