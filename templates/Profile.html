@@ -38,7 +38,8 @@
             transition: background 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links .active {
             background: rgba(255, 255, 255, 0.1);
         }
 
@@ -178,7 +179,7 @@
 
                 <div class="form-group">
                     <label for="experience">Experience (Years)</label>
-                    <input type="number" id="experience" name="experience" required>
+                    <input type="number" id="experience" name="experience" min="0" required>
                 </div>
 
                 <div class="form-group">
@@ -198,7 +199,7 @@
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
                 </div>
 
                 <div class="form-group">
@@ -226,6 +227,16 @@
             <div id="successMessage" class="success-message">Profile updated successfully!</div>
         </div>
     </div>
-    <script src="/action/index2.js"></script>
+
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('successMessage').style.display = 'block';
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            window.location.href = '/Login.html';
+        });
+    </script>
 </body>
 </html>

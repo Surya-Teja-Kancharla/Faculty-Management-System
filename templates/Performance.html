@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Report</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .navbar {
+            background: #1e4d92;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .performance-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .performance-header {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .performance-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #1e4d92;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .performance-info h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .performance-info p {
+            color: #666;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #1e4d92;
+        }
+
+        .metric-title {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            color: #1e4d92;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .trend-up {
+            color: #28a745;
+        }
+
+        .trend-down {
+            color: #dc3545;
+        }
+
+        .semester-results {
+            margin-top: 2rem;
+        }
+
+        .results-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .results-table th,
+        .results-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .results-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .results-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #1e4d92;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .leaves-summary {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .leaves-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .leave-type {
+            padding: 1rem;
+            background: white;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .leave-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e4d92;
+            margin: 0.5rem 0;
+        }
+
+        .leave-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Faculty Portal</div>
+        <div class="nav-links">
+            <a href="/Profile.html">Profile</a>
+            <a href="/Achievements.html">Achievements</a>
+            <a href="/TimeTable.html">Time Table</a>
+            <a href="/Notifications.html">Notifications</a>
+            <a href="/Performance.html" class="active">Performance</a>
+            <a href="/Login.html" id="logoutBtn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="performance-card">
+            <div class="performance-header">
+                <div class="performance-icon">📊</div>
+                <div class="performance-info">
+                    <h1>Performance Report</h1>
+                    <p>Track your academic performance and teaching effectiveness</p>
+                </div>
+            </div>
+
+            <div class="performance-grid">
+                <div class="metric-card">
+                    <div class="metric-title">Overall Result Factor</div>
+                    <div class="metric-value">8.5</div>
+                    <div class="metric-trend trend-up">
+                        ↑ 0.3 from last semester
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-title">Average Pass Percentage</div>
+                    <div class="metric-value">92%</div>
+                    <div class="metric-trend trend-up">
+                        ↑ 5% from last semester
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-title">Teaching Hours</div>
+                    <div class="metric-value">16</div>
+                    <div class="metric-trend">
+                        per week
+                    </div>
+                </div>
+            </div>
+
+            <div class="semester-results">
+                <h2>Semester-wise Subject Performance</h2>
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Semester</th>
+                            <th>Pass Percentage</th>
+                            <th>Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsTableBody">
+                        <!-- Data will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="leaves-summary">
+                <h2>Leave Summary</h2>
+                <div class="leaves-grid">
+                    <div class="leave-type">
+                        <div class="leave-count">5</div>
+                        <div class="leave-label">Casual Leave (CL)</div>
+                    </div>
+                    <div class="leave-type">
+                        <div class="leave-count">3</div>
+                        <div class="leave-label">Earned Leave (EL)</div>
+                    </div>
+                    <div class="leave-type">
+                        <div class="leave-count">2</div>
+                        <div class="leave-label">On-Duty Leave (ODL)</div>
+                    </div>
+                    <div class="leave-type">
+                        <div class="leave-count">1</div>
+                        <div class="leave-label">Academic Leave (AL)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/action/index6.js"></script>
+</body>
+</html>

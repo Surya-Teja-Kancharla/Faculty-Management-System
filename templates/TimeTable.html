@@ -16,32 +16,6 @@
             background: #f5f5f5;
         }
 
-        .navbar {
-            background: #1e4d92;
-            padding: 1rem 2rem;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -53,6 +27,7 @@
             border-radius: 10px;
             padding: 2rem;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
         }
 
         .timetable-header {
@@ -73,6 +48,7 @@
             width: 100%;
             border-collapse: collapse;
             margin-top: 1rem;
+            min-width: 900px;
         }
 
         .timetable th, .timetable td {
@@ -89,6 +65,12 @@
 
         .timetable td {
             vertical-align: top;
+        }
+
+        .day-column {
+            background: #f8f9fa;
+            font-weight: 500;
+            width: 100px;
         }
 
         .class-slot {
@@ -110,11 +92,6 @@
             padding: 0.5rem;
             border-radius: 4px;
             color: #666;
-        }
-
-        .time-column {
-            background: #f8f9fa;
-            font-weight: 500;
         }
 
         .legend {
@@ -144,17 +121,8 @@
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Faculty Portal</div>
-        <div class="nav-links">
-            <a href="/Profile.html">Profile</a>
-            <a href="/Achievements.html">Achievements</a>
-            <a href="/TimeTable.html" class="active">Time Table</a>
-            <a href="/Notifications.html">Notifications</a>
-            <a href="/Performance.html">Performance</a>
-            <a href="/Login.html">Logout</a>
-        </div>
-    </nav>
+    <!-- Include Navbar -->
+    <div id="navbar-container"></div>
 
     <div class="container">
         <div class="timetable-card">
@@ -169,13 +137,14 @@
             <table class="timetable">
                 <thead>
                     <tr>
-                        <th>Time</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
+                        <th>Day</th>
+                        <th>8:45-9:45</th>
+                        <th>9:45-10:35</th>
+                        <th>10:35-11:25</th>
+                        <th>11:25-12:15</th>
+                        <th>12:15-1:05</th>
+                        <th>1:55-2:45</th>
+                        <th>2:45-3:35</th>
                     </tr>
                 </thead>
                 <tbody id="timetableBody">
@@ -200,6 +169,14 @@
         </div>
     </div>
 
+    <script>
+        // Load navbar
+        fetch('/navbar.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navbar-container').innerHTML = html;
+            });
+    </script>
     <script src="/action/index4.js"></script>
 </body>
 </html>
