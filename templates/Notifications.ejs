@@ -185,12 +185,12 @@
     <nav class="navbar">
         <div class="logo">Faculty Portal</div>
         <div class="nav-links">
-            <a href="/Profile.html">Profile</a>
-            <a href="/Achievements.html">Achievements</a>
-            <a href="/TimeTable.html">Time Table</a>
-            <a href="/Notifications.html" class="active">Notifications</a>
-            <a href="/Performance.html">Performance</a>
-            <a href="/Login.html" id="logoutBtn">Logout</a>
+            <a href="/profile" class="active">Profile</a>
+            <a href="/achievements">Achievements</a>
+            <a href="/timetable">Time Table</a>
+            <a href="/notifications">Notifications</a>
+            <a href="/performance">Performance</a>
+            <a href="/" id="logoutBtn">Logout</a>
         </div>
     </nav>
 
@@ -205,8 +205,25 @@
             </div>
 
             <div class="notification-list" id="notifications">
-                <!-- Notifications will be dynamically inserted here -->
-            </div>
+                <% if (notifications.length > 0) { %>
+                  <% notifications.forEach(notification => { %>
+                    <div class="notification <%= notification.Status === 'Unread' ? 'notification-priority' : 'notification-read' %>">
+                      <div class="notification-content">
+                        <p><%= notification.Message %></p>
+                        <p class="notification-time"><%= new Date(notification.Time_Of_Arrival).toLocaleString() %></p>
+                      </div>
+                      <div class="notification-actions">
+                        <% if (notification.Status === 'Unread') { %>
+                          <button class="btn mark-read" data-id="<%= notification.Notification_ID %>">Mark as Read</button>
+                        <% } %>
+                      </div>
+                    </div>
+                  <% }); %>
+                <% } else { %>
+                  <p>No notifications at the moment.</p>
+                <% } %>
+              </div>
+              
 
             <div class="clear-button-container">
                 <button id="clearNotifications" class="btn btn-clear">Clear All Notifications</button>

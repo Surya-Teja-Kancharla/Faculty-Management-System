@@ -10,6 +10,31 @@
             padding: 0;
             box-sizing: border-box;
         }
+        .navbar {
+            background: #1e4d92;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -125,8 +150,17 @@
     </style>
 </head>
 <body>
-    <!-- Include Navbar -->
-    <div id="navbar-container"></div>
+    <nav class="navbar">
+        <div class="logo">Faculty Portal</div>
+        <div class="nav-links">
+            <a href="/profile" class="active">Profile</a>
+            <a href="/achievements">Achievements</a>
+            <a href="/timetable">Time Table</a>
+            <a href="/notifications">Notifications</a>
+            <a href="/performance">Performance</a>
+            <a href="/" id="logoutBtn">Logout</a>
+        </div>
+    </nav>
 
     <div class="container">
         <div class="timetable-card">
@@ -151,10 +185,23 @@
                         <th>2:45-3:35</th>
                     </tr>
                 </thead>
-                <tbody id="timetableBody">
-                    <!-- Timetable content will be populated by JavaScript -->
+                <tbody>
+                    <% for (let day = 1; day <= 5; day++) { %>
+                    <tr>
+                        <td><%= ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"][day - 1] %></td>
+                        <td><%= timetable[day][1] || "Free" %></td>
+                        <td><%= timetable[day][2] || "Free" %></td>
+                        <td><%= timetable[day][3] || "Free" %></td>
+                        <td><%= timetable[day][4] || "Free" %></td>
+                        <td><%= timetable[day][5] || "Free" %></td>
+                        <td><%= timetable[day][6] || "Free" %></td>
+                        <td><%= timetable[day][7] || "Free" %></td>
+                    </tr>
+                    <% } %>
                 </tbody>
             </table>
+            
+              
 
             <div class="legend">
                 <div class="legend-item">

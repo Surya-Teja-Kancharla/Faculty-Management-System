@@ -152,12 +152,12 @@
     <nav class="navbar">
         <div class="logo">Faculty Portal</div>
         <div class="nav-links">
-            <a href="/Profile.html" class="active">Profile</a>
-            <a href="/Achievements.html">Achievements</a>
-            <a href="/TimeTable.html">Time Table</a>
-            <a href="/Notifications.html">Notifications</a>
-            <a href="/Performance.html">Performance</a>
-            <a href="/Login.html" id="logoutBtn">Logout</a>
+            <a href="/profile" class="active">Profile</a>
+            <a href="/achievements">Achievements</a>
+            <a href="/timetable">Time Table</a>
+            <a href="/notifications">Notifications</a>
+            <a href="/performance">Performance</a>
+            <a href="/" id="logoutBtn">Logout</a>
         </div>
     </nav>
 
@@ -166,65 +166,61 @@
             <div class="profile-header">
                 <div class="profile-image">👤</div>
                 <div class="profile-info">
-                    <h1>Faculty Profile</h1>
+                    <h1><%= faculty.Name %></h1>
                     <p>Manage your personal and professional information</p>
                 </div>
             </div>
 
+            <!-- Dynamically populate the form fields -->
             <form id="profileForm" class="profile-form">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="qualification">Qualification</label>
-                    <input type="text" id="qualification" name="qualification" required>
+                    <input type="text" id="name" name="name" value="<%= faculty.Name %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="experience">Experience (Years)</label>
-                    <input type="number" id="experience" name="experience" min="0" required>
+                    <input type="number" id="experience" name="experience" value="<%= faculty.Experience %>" min="0" required>
                 </div>
 
                 <div class="form-group">
                     <label for="gender">Gender</label>
-                    <input type="text" id="gender" name="gender" required>
+                    <input type="text" id="gender" name="gender" value="<%= faculty.Gender %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="personalEmail">Personal Email</label>
-                    <input type="email" id="personalEmail" name="personalEmail" required>
+                    <input type="email" id="personalEmail" name="personalEmail" value="<%= faculty.Personal_Mail %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="collegeEmail">College Email</label>
-                    <input type="email" id="collegeEmail" name="collegeEmail" required>
+                    <input type="email" id="collegeEmail" name="collegeEmail" value="<%= faculty.College_Mail %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required>
+                    <input type="tel" id="phone" name="phone" value="<%= faculty.Phone_Number %>" pattern="[0-9]{10}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="department">Department</label>
-                    <input type="text" id="department" name="department" required>
+                    <input type="text" id="department" name="department" value="<%= faculty.Department %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="designation">Designation</label>
-                    <input type="text" id="designation" name="designation" required>
+                    <input type="text" id="designation" name="designation" value="<%= faculty.Designation %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="joiningDate">Joining Date</label>
-                    <input type="date" id="joiningDate" name="joiningDate" required>
+                    <input type="date" id="joiningDate" name="joiningDate" value="<%= faculty.Joining_Date %>" required>
                 </div>
 
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" id="address" name="address" required>
+                    <input type="text" id="address" name="address" value="<%= faculty.Address %>" required>
                 </div>
 
                 <button type="submit" class="save-btn">Save Changes</button>
