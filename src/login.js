@@ -28,7 +28,7 @@ connection.connect(function (err) {
     console.log("Connected to the database successfully!!!");
 });
 
-// Serve Login.html file
+// Serve Login.html file from templates folder
 app.get("/", function (req, res) {
     const filePath = path.join(__dirname, "../templates/Login.html");
     res.sendFile(filePath);
@@ -59,9 +59,39 @@ app.post("/", function (req, res) {
     );
 });
 
-// Serve Profile.html for successful login
+// Serve Profile page from templates folder
 app.get("/profile", function (req, res) {
     const filePath = path.join(__dirname, "../templates/Profile.html");
+    res.sendFile(filePath);
+});
+
+// Serve Achievements page from templates folder
+app.get("/achievements", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Achievements.html");
+    res.sendFile(filePath);
+});
+
+// Serve Timetable page from templates folder
+app.get("/timetable", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Timetable.html");
+    res.sendFile(filePath);
+});
+
+// Serve Notifications page from templates folder
+app.get("/notifications", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Notifications.html");
+    res.sendFile(filePath);
+});
+
+// Serve Performance page from templates folder
+app.get("/performance", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Performance.html");
+    res.sendFile(filePath);
+});
+
+// Logout route (redirects to login page)
+app.get("/login", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Login.html");
     res.sendFile(filePath);
 });
 

@@ -30,18 +30,18 @@
 <nav class="navbar">
     <div class="logo">Faculty Portal</div>
     <div class="nav-links">
-        <a href="/templates/Profile.html" id="profileLink">Profile</a>
-        <a href="/templates/Achievements.html" id="achievementsLink">Achievements</a>
-        <a href="/templates/TimeTable.html" id="timetableLink">Time Table</a>
-        <a href="/templates/Notifications.html" id="notificationsLink">Notifications</a>
-        <a href="/templates/Performance.html" id="performanceLink">Performance</a>
-        <a href="/templates/Login.html" id="logoutBtn">Logout</a>
+        <a href="/profile" id="profileLink">Profile</a>
+        <a href="/achievements" id="achievementsLink">Achievements</a>
+        <a href="/timetable" id="timetableLink">Time Table</a>
+        <a href="/notifications" id="notificationsLink">Notifications</a>
+        <a href="/performance" id="performanceLink">Performance</a>
+        <a href="/login" id="logoutBtn">Logout</a>
     </div>
 </nav>
 
 <script>
     // Set active link based on current page
-    const currentPage = window.location.pathname.split('/').pop().split('.')[0].toLowerCase();
+    const currentPage = window.location.pathname.split('/').pop().toLowerCase();
     const links = {
         'profile': document.getElementById('profileLink'),
         'achievements': document.getElementById('achievementsLink'),
@@ -61,6 +61,6 @@
         localStorage.clear();
         sessionStorage.clear();
         // Redirect to login page
-        window.location.href = '/templates/Login.html';
+        window.location.href = '/login';
     });
 </script>

@@ -5,12 +5,12 @@ function createNavbar(currentPage) {
     navbar.innerHTML = `
         <div class="logo">Faculty Portal</div>
         <div class="nav-links">
-            <a href="/templates/Profile.html" ${currentPage === 'profile' ? 'class="active"' : ''}>Profile</a>
-            <a href="/templates/Achievements.html" ${currentPage === 'achievements' ? 'class="active"' : ''}>Achievements</a>
-            <a href="/templates/TimeTable.html" ${currentPage === 'timetable' ? 'class="active"' : ''}>Time Table</a>
-            <a href="/templates/Notifications.html" ${currentPage === 'notifications' ? 'class="active"' : ''}>Notifications</a>
-            <a href="/templates/Performance.html" ${currentPage === 'performance' ? 'class="active"' : ''}>Performance</a>
-            <a href="/templates/Login.html" id="logoutBtn">Logout</a>
+            <a href="/profile" ${currentPage === 'profile' ? 'class="active"' : ''}>Profile</a>
+            <a href="/achievements" ${currentPage === 'achievements' ? 'class="active"' : ''}>Achievements</a>
+            <a href="/timetable" ${currentPage === 'timetable' ? 'class="active"' : ''}>Time Table</a>
+            <a href="/notifications" ${currentPage === 'notifications' ? 'class="active"' : ''}>Notifications</a>
+            <a href="/performance" ${currentPage === 'performance' ? 'class="active"' : ''}>Performance</a>
+            <a href="/login" id="logoutBtn">Logout</a>
         </div>
     `;
     return navbar;
@@ -42,6 +42,11 @@ const navbarStyles = `
 
     .nav-links a:hover, .nav-links a.active {
         background: rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+        font-size: 30px;
+        font-weight: 30px;
     }
 `;
 
