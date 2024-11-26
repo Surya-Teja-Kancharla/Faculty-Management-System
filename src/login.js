@@ -24,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if (data.success) {
-            window.location.href = '/Profile.html';
+            window.location.href = '/src/Profile.html';
         } else {
             errorMessage.style.display = 'block';
             errorMessage.textContent = data.message || 'Invalid credentials';
