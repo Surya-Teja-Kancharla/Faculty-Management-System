@@ -1,36 +1,71 @@
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const errorMessage = document.getElementById('errorMessage');
-    
-    // Email validation: Check if the email ends with @anits.edu.in
-    if (!email.endsWith('@anits.edu.in')) {
-        errorMessage.style.display = 'block';
-        errorMessage.textContent = 'Email must end with @anits.edu.in';
-        return;
-    }
+import mysql from "mysql";
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url"; // Import helper function for ES modules
+import bodyParser from "body-parser";
 
-    try {
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            window.location.href = '/src/Profile.html';
-        } else {
-            errorMessage.style.display = 'block';
-            errorMessage.textContent = data.message || 'Invalid credentials';
+const app = express();
+const port = 3000;
+
+// Define __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Parse URL-encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// Database connection
+const connection = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "kst017@anits",  // Make sure this is your actual MySQL password
+    database: "faculty"
+});
+
+// Connect to the database
+connection.connect(function (err) {
+    if (err) throw err;
+    console.log("Connected to the database successfully!!!");
+});
+
+// Serve Login.html file
+app.get("/", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Login.html");
+    res.sendFile(filePath);
+});
+
+// Handle login POST request
+app.post("/", function (req, res) {
+    console.log("POST request received");
+    const email = req.body.email;
+    const password = req.body.password;
+
+    connection.query(
+        "SELECT College_Mail, Password FROM FacultyInfo WHERE College_Mail = ? AND Password = ?",
+        [email, password],
+        function (error, results) {
+            if (error) {
+                throw error;
+            }
+
+            if (results.length > 0) {
+                // Redirect to profile route on success
+                res.redirect("/profile");
+            } else {
+                // Redirect back to login on failure
+                res.redirect("/");
+            }
         }
-    } catch (error) {
-        errorMessage.style.display = 'block';
-        errorMessage.textContent = 'An error occurred. Please try again.';
-    }
+    );
+});
+
+// Serve Profile.html for successful login
+app.get("/profile", function (req, res) {
+    const filePath = path.join(__dirname, "../templates/Profile.html");
+    res.sendFile(filePath);
+});
+
+// Set app port
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
 });
