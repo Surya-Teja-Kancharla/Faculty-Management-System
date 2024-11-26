@@ -53,6 +53,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         localStorage.clear();
         sessionStorage.clear();
         // Redirect to login page
-        window.location.href = '/Login.html';
+        window.location.href = '/templates/Login.html';
     });
 });
