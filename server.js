@@ -4,11 +4,16 @@ import { dirname, join } from "path";
 import mysql from "mysql";
 import cookieParser from "cookie-parser";
 import async from "async";
+import bodyParser from "body-parser";
+// const bodyParser = require('body-parser'); // Ensure this package is installed
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 app.use(express.json());
 app.use(cookieParser());
@@ -73,22 +78,67 @@ app.get("/profile", (req, res) => {
   });
 });
 
-// app.get("/achievements", (req, res) => {
-//   const facultyId = req.cookies.Faculty_ID;
-//   if (!facultyId) {
-//     return res.redirect("/");
-//   }
+app.post("/updateProfile", (req, res) => {
+  const facultyId = req.cookies.Faculty_ID; // Ensure cookies middleware is set up
+  if (!facultyId) {
+    return res.redirect("/");
+  }
 
-//   const sql = "SELECT * FROM facultyinfo WHERE Faculty_ID = ?";
-//   connection.query(sql, [facultyId], (err, results) => {
-//     if (err) {
-//       console.log(err);
-//       res.status(500).json({ message: "Database error" });
-//     } else {
-//       res.render("Achievements", { faculty: results[0] });
-//     }
-//   });
-// });
+  const {
+    name,
+    experience,
+    gender,
+    personalEmail,
+    collegeEmail,
+    phone,
+    department,
+    designation,
+    joiningDate,
+    address,
+  } = req.body;
+
+  const updateSql = `
+    UPDATE facultyinfo 
+    SET Name = ?, Experience = ?, Gender = ?, Personal_Mail = ?, College_Mail = ?, 
+        Phone_Number = ?, Department = ?, Designation = ?, Joining_Date = ?, Address = ? 
+    WHERE Faculty_ID = ?`;
+
+  const values = [
+    name,
+    experience,
+    gender,
+    personalEmail,
+    collegeEmail,
+    phone,
+    department,
+    designation,
+    joiningDate,
+    address,
+    facultyId,
+  ];
+
+  connection.query(updateSql, values, (err, results) => {
+    if (err) {
+      console.error("Database Error: ", err);
+      return res.status(500).json({ message: "Database update error" });
+    }
+
+    // Fetch the updated data
+    const fetchSql = "SELECT * FROM facultyinfo WHERE Faculty_ID = ?";
+    connection.query(fetchSql, [facultyId], (err, rows) => {
+      if (err) {
+        console.error("Error fetching updated data: ", err);
+        return res.status(500).json({ message: "Error fetching updated data" });
+      }
+
+      // Send the updated data back to the client
+      // res.render("Profile", { faculty: rows[0] });
+      res.status(200).json({ message: "Profile updated successfully", faculty: rows[0] });
+    });
+  });
+});
+
+
 
 app.get("/timetable", (req, res) => {
   const facultyId = req.cookies.Faculty_ID;
