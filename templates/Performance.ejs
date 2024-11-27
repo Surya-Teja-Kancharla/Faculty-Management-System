@@ -218,7 +218,7 @@
             <a href="/timetable">Time Table</a>
             <a href="/notifications">Notifications</a>
             <a href="/performance">Performance</a>
-            <a href="/" id="logoutBtn">Logout</a>
+            <a href="/logout" id="logoutBtn">Logout</a>
         </div>
     </nav>
 
@@ -231,24 +231,23 @@
                     <p>Track your academic performance and teaching effectiveness</p>
                 </div>
             </div>
-
             <div class="performance-grid">
                 <div class="metric-card">
                     <div class="metric-title">Overall Result Factor</div>
-                    <div class="metric-value">8.5</div>
+                    <div class="metric-value"><%= resultFactor %></div>
                     <div class="metric-trend trend-up">
                         ↑ 0.3 from last semester
                     </div>
                 </div>
-
+            
                 <div class="metric-card">
                     <div class="metric-title">Average Pass Percentage</div>
-                    <div class="metric-value">92%</div>
+                    <div class="metric-value"><%= averagePassPercentage %>%</div>
                     <div class="metric-trend trend-up">
                         ↑ 5% from last semester
                     </div>
                 </div>
-
+            
                 <div class="metric-card">
                     <div class="metric-title">Teaching Hours</div>
                     <div class="metric-value">16</div>
@@ -257,7 +256,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="semester-results">
                 <h2>Semester-wise Subject Performance</h2>
                 <table class="results-table">
@@ -266,11 +264,19 @@
                             <th>Subject</th>
                             <th>Semester</th>
                             <th>Pass Percentage</th>
-                            <th>Progress</th>
+                            <th>Credits</th>
                         </tr>
                     </thead>
                     <tbody id="resultsTableBody">
-                        <!-- Data will be dynamically populated -->
+                        <% performance.forEach((row) => { %>
+                            <tr>
+                              <td><%= row.Course_Name %></td>
+                              <td><%= row.Sem_Name %></td>
+                              <td><%= ((row.Pass_Student_Count / row.Students_Count) * 100).toFixed(2) %>%</td>
+                              <td><%= row.Credits %></td>
+                            </tr>
+                          <% }); %>
+                          
                     </tbody>
                 </table>
             </div>
@@ -278,24 +284,18 @@
             <div class="leaves-summary">
                 <h2>Leave Summary</h2>
                 <div class="leaves-grid">
-                    <div class="leave-type">
-                        <div class="leave-count">5</div>
-                        <div class="leave-label">Casual Leave (CL)</div>
-                    </div>
-                    <div class="leave-type">
-                        <div class="leave-count">3</div>
-                        <div class="leave-label">Earned Leave (EL)</div>
-                    </div>
-                    <div class="leave-type">
-                        <div class="leave-count">2</div>
-                        <div class="leave-label">On-Duty Leave (ODL)</div>
-                    </div>
-                    <div class="leave-type">
-                        <div class="leave-count">1</div>
-                        <div class="leave-label">Academic Leave (AL)</div>
-                    </div>
+                    <% leaveData.forEach(row => { %>
+                        <div class="leave-type">
+                            <div class="leave-count"><%= row.Total_Days %></div>
+                            <div class="leave-label">
+                                <%= row.Leave_Type %> (<%= row.Leave_Type_Abbr %>)
+                            </div>
+                        </div>
+                    <% }); %>
                 </div>
             </div>
+            
+            
         </div>
     </div>
 

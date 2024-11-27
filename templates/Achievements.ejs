@@ -199,34 +199,85 @@
             <a href="/timetable">Time Table</a>
             <a href="/notifications">Notifications</a>
             <a href="/performance">Performance</a>
-            <a href="/" id="logoutBtn">Logout</a>
+            <a href="/logout" id="logoutBtn">Logout</a>
         </div>
     </nav>
 
     <div class="container">
-        <div class="achievements-section">
-            <div class="section-header">
-                <h2 class="section-title">Projects</h2>
-                <button class="add-btn" onclick="openModal('projects')">Add Project</button>
+        <!-- Projects Section -->
+<div class="achievements-section">
+    <div class="section-header">
+        <h2 class="section-title">Projects</h2>
+        <button class="add-btn" onclick="openModal('projects')">Add Project</button>
+    </div>
+    <div id="projectsList" class="achievement-list">
+        <% projects.forEach(function(project) { %>
+            <div class="achievement-item">
+                <div class="achievement-info">
+                    <h3><%= project.Project_Title %></h3>
+                    <p><%= project.Description %></p>
+                    <p><strong>Start Date:</strong> <%= new Date(project.Start_date).toLocaleDateString('en-GB') %></p>
+                    <p><strong>End Date:</strong> <%= new Date(project.End_date).toLocaleDateString('en-GB') %></p>
+                    <p><strong>Status:</strong> <%= project.Status %></p>
+                </div>
+                <div class="achievement-actions">
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
             </div>
-            <div id="projectsList" class="achievement-list"></div>
-        </div>
+        <% }) %>
+    </div>
+</div>
 
-        <div class="achievements-section">
-            <div class="section-header">
-                <h2 class="section-title">Patents</h2>
-                <button class="add-btn" onclick="openModal('patents')">Add Patent</button>
+<!-- Publications Section -->
+<div class="achievements-section">
+    <div class="section-header">
+        <h2 class="section-title">Publications</h2>
+        <button class="add-btn" onclick="openModal('publications')">Add Publication</button>
+    </div>
+    <div id="publicationsList" class="achievement-list">
+        <% publications.forEach(function(publication) { %>
+            <div class="achievement-item">
+                <div class="achievement-info">
+                    <h3><%= publication.Title %></h3>
+                    <p><strong>Journal:</strong> <%= publication.Journal_Name %></p>
+                    <p><strong>Start Date:</strong> <%= new Date(publication.Start_date).toLocaleDateString('en-GB') %></p>
+                    <p><strong>End Date:</strong> <%= new Date(publication.End_date).toLocaleDateString('en-GB') %></p>
+                    <p><strong>DOI Link:</strong> <a href="<%= publication.DOI_Link %>" target="_blank"><%= publication.DOI_Link %></a></p>
+                </div>
+                <div class="achievement-actions">
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
             </div>
-            <div id="patentsList" class="achievement-list"></div>
-        </div>
+        <% }) %>
+    </div>
+</div>
 
-        <div class="achievements-section">
-            <div class="section-header">
-                <h2 class="section-title">Publications</h2>
-                <button class="add-btn" onclick="openModal('publications')">Add Publication</button>
+<!-- Patents Section -->
+<div class="achievements-section">
+    <div class="section-header">
+        <h2 class="section-title">Patents</h2>
+        <button class="add-btn" onclick="openModal('patents')">Add Patent</button>
+    </div>
+    <div id="patentsList" class="achievement-list">
+        <% patents.forEach(function(patent) { %>
+            <div class="achievement-item">
+                <div class="achievement-info">
+                    <h3><%= patent.Patent_Title %></h3>
+                    <p><%= patent.Description %></p>
+                    <p><strong>Start Date:</strong> <%= new Date(patent.Start_date).toLocaleDateString('en-GB') %></p>
+                    <p><strong>End Date:</strong> <%= new Date(patent.End_date).toLocaleDateString('en-GB') %></p>
+                </div>
+                <div class="achievement-actions">
+                    <button class="edit-btn">Edit</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
             </div>
-            <div id="publicationsList" class="achievement-list"></div>
-        </div>
+        <% }) %>
+    </div>
+</div>
+
 
         <div class="achievements-section">
             <div class="section-header">
@@ -274,6 +325,6 @@
         </div>
     </div>
 
-    <script src="/src/achievements.js"></script>
+    <!-- <script src="/src/achievements.js"></script> -->
 </body>
 </html>
