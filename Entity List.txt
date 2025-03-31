@@ -1,0 +1,122 @@
+List of entities and their attributes
+
+Note: We are currently considering only the profile of a single faculty. So all tables will have only 1 or 2 entries max(depending on the table's purpose). So perform normalization of all the tables upto NF3 on a ground level
+
+1. Faculty
+- Faculty_ID (Primary Key)
+- Name
+- Gender
+- Date_of_Birth
+- Email(Personal)
+- Email(College)
+- Phone_Number
+- Address
+- Department_ID (Foreign Key to `Department`)
+- Designation
+- Joining_Date
+- Experience
+- Salary
+- Password (for login)
+
+2. Department
+- Dept_ID (Primary Key)
+- Dept_Name (e.g., CSM, CSD)
+- HOD_ID (Foreign Key to `Faculty`)
+
+3. Courses
+- Course_ID (Primary Key)
+- Course_Name
+- Credits
+- Semester_ID (Foreign Key to `Semester`)
+- Department_ID (Foreign Key to `Department`)
+- Faculty_ID (Foreign Key to `Faculty`)
+
+4. Timetable
+- Faculty_ID (Foreign Key to `Faculty`)
+- Day_of_Week
+- Period_Number
+
+5. Semester
+- Semester_ID (Primary Key)
+- Semester_Name (e.g., 2-2, 3-1)
+- Start_Date
+- End_Date
+
+6. Results
+- Result_ID (Primary Key)
+- Course_ID (Foreign Key to `Course`)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Semester_ID (Foreign Key to `Semester`)
+- Student_Count
+- Pass_Percentage
+- Result_Factor
+
+7. Leaves
+- Leave_ID (Primary Key)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Leave_Type (e.g., CL, EL, ODL, AL)
+- Start_Date
+- End_Date
+- Status (Approved/Rejected/Pending)
+- Applied_Date
+
+8. Notifications(appear only when HOD makes any changes in the timetable or calls for a meeting)
+- Notification_ID (Primary Key)
+- Recipient_ID (Foreign Key to `Faculty`)
+- Message
+- Time_Of_Arrival(Datetime)
+- Status (Read/Unread)
+
+9. Projects
+- Project_ID (Primary Key)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Project_Title
+- Project_Number
+- Start_Date
+- End_Date
+- Status(Completed/Not Completed)
+
+10. Patents
+- Patent_ID (Primary Key)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Patent_Title
+- Patent_Number
+- Filing_Date
+- Grant_Date
+
+11. Publications(Research_Publication)
+- Publication_ID (Primary Key)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Title
+- Journal_Name
+- Publication_Date
+- DOI_Link(A DOI, or Digital Object Identifier, is a string of numbers, letters and symbols used to uniquely identify an article or document, and to provide it with a permanent web address (URL))
+
+12.Taining_Programmes
+- Training_Programme_ID (Primary Key)
+- Faculty_ID (Foreign Key to Faculty)
+- Programme_Title
+- Organizing_Body
+- Location
+- Start_Date
+- End_Date
+- Certificate_Status (Received/Not Received)
+- Programme_Type (e.g., Workshop, Seminar, etc)
+
+13. Achievements
+- Achievement_ID (Primary Key)
+- Faculty_ID (Foreign Key to Faculty)
+- Achievement_Title
+- Achievement_Description
+- Date_Awarded
+- Level (e.g., Department, College, State, National, International)
+- Awarding_Body
+
+14. Performance_Report
+- Report_ID (Primary Key)
+- Faculty_ID (Foreign Key to `Faculty`)
+- Semester_ID (Foreign Key to `Semester`)
+- Teaching_Hours
+- Free_Periods(e.g., out of 35 for 5 days)
+- Pass_Percentage
+- Achievement_ID (Foreign Key to Achievements)
