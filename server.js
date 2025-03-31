@@ -3,10 +3,7 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import mysql from "mysql";
 import cookieParser from "cookie-parser";
-import async from "async";
 import bodyParser from "body-parser";
-// const bodyParser = require('body-parser'); // Ensure this package is installed
-
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -23,7 +20,7 @@ app.set("views", join(__dirname, "templates"));
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Loveyourself",
+  password: "kst017@anits",
   database: "faculty",
 });
 
